@@ -3,8 +3,6 @@ const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
 
-
-
 let Alldata = [
     { 
       "id": 1,
@@ -27,7 +25,6 @@ let Alldata = [
       "number": "39-23-6423122"
     }
 ]
-
 
 app.use(cors())
 app.use(express.static('build'))

@@ -28,7 +28,9 @@ let Alldata = [
     }
 ]
 
+
 app.use(cors())
+app.use(express.static('build'))
 app.use(express.json())
 
 morgan.token('body', (req) => {

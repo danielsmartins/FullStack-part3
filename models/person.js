@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const mongoose = require('mongoose')
 require('dotenv').config()
 
@@ -18,13 +19,21 @@ const personSchema = new mongoose.Schema({
         type: String,
         minLength: 3,
         maxLength: 32,
-        required: true
+        required:  [true, 'O nome é obrigatório.'],
     },
     number: {
         type: String,
-        required: true,
-        minLength: 8,
-        maxLength: 20
+        required:  [true, 'O número de telefone é obrigatório.'],
+        validate: {
+            validator: function(v) {
+                
+                const cleaned = v.replace(/\D/g, '')
+        
+                
+                return cleaned.length >= 8 && cleaned.length <= 13
+            },
+            message: props => `${props.value} não é um número de telefone brasileiro válido! O número deve conter entre 8 e 13 dígitos.`
+        }
     },
 })
 

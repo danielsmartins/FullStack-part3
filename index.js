@@ -3,25 +3,8 @@ const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
-require('dotenv').config()
 
 
-const url = process.env.MONGODB_URI
-
-if (!url) {
-  console.error('Fatal Error: variable url not defined.');
-  process.exit(1); 
-}
-
-console.log('connecting to', url)
-
-mongoose.connect(url)
-  .then(result => {
-    console.log('connected to MongoDB')
-  })
-  .catch((error) => {
-    console.log('error connecting to MongoDB:', error.message)
-  })
 
 //middlewares
 app.use(express.static('build'))

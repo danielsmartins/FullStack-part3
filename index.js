@@ -3,6 +3,7 @@ const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
+const rateLimit = require('express-rate-limit')
 
 
 
@@ -11,6 +12,13 @@ app.use(express.static('build'))
 app.use(cors())
 app.use(express.json())
 
+const apiLimiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // Janela de tempo: 15 minutos
+	max: 15, // Limite: permite 10 requisições de criação por IP a cada 15 minutos
+	message: { error: 'Too many accounts created from this IP, please try again after 15 minutes' },
+	standardHeaders: true, // Retorna informações do limite nos headers `RateLimit-*`
+	legacyHeaders: false, // Desabilita os headers antigos `X-RateLimit-*`
+})
 
 
 morgan.token('body', (req) => {
@@ -67,7 +75,7 @@ app.delete('/api/persons/:id', (request , response, next) => {
 })
 
 //POST: cria uma pessoa
-app.post('/api/persons', (request, response, next) => {
+app.post('/api/persons', apiLimiter, (request, response, next) => {
     const { name, number } = request.body
 
     if (!name || !number) {

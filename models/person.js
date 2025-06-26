@@ -19,11 +19,11 @@ const personSchema = new mongoose.Schema({
         type: String,
         minLength: 3,
         maxLength: 32,
-        required:  [true, 'O nome é obrigatório.'],
+        required:  [true, 'name is required'],
     },
     number: {
         type: String,
-        required:  [true, 'O número de telefone é obrigatório.'],
+        required:  [true, 'number is required'],
         validate: {
             validator: function(v) {
                 
@@ -32,7 +32,7 @@ const personSchema = new mongoose.Schema({
                 
                 return cleaned.length >= 8 && cleaned.length <= 13
             },
-            message: props => `${props.value} não é um número de telefone brasileiro válido! O número deve conter entre 8 e 13 dígitos.`
+            message: props => `${props.value} isn't a valid brazilian number! It must have between 8 and 13 digits`
         }
     },
 })

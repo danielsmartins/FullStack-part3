@@ -13,11 +13,11 @@ app.use(cors())
 app.use(express.json())
 
 const apiLimiter = rateLimit({
-	windowMs: 15 * 60 * 1000, // Janela de tempo: 15 minutos
-	max: 15, // Limite: permite 10 requisições de criação por IP a cada 15 minutos
-	message: { error: 'Too many accounts created from this IP, please try again after 15 minutes' },
-	standardHeaders: true, // Retorna informações do limite nos headers `RateLimit-*`
-	legacyHeaders: false, // Desabilita os headers antigos `X-RateLimit-*`
+    windowMs: 15 * 60 * 1000, // Janela de tempo: 15 minutos
+    max: 15, // Limite: permite 10 requisições de criação por IP a cada 15 minutos
+    message: { error: 'Too many accounts created from this IP, please try again after 15 minutes' },
+    standardHeaders: true, // Retorna informações do limite nos headers `RateLimit-*`
+    legacyHeaders: false, // Desabilita os headers antigos `X-RateLimit-*`
 })
 
 

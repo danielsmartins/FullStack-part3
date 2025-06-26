@@ -8,8 +8,8 @@ require('dotenv').config()
 
 const url = process.env.MONGODB_URI
 
-if (!mongoURI) {
-  console.error('ERRO FATAL: A variável de ambiente MONGODB_URI não está definida.');
+if (!url) {
+  console.error('Fatal Error: variable url not defined.');
   process.exit(1); 
 }
 

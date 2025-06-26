@@ -116,7 +116,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 
 //tratamento de erros
-const errorHandler = (error, request, response) => {
+const errorHandler = (error, request, response, next) => {
     console.error(error.name, error.message)
 
     if (error.name === 'CastError') {

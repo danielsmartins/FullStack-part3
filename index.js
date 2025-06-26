@@ -6,6 +6,23 @@ const Person = require('./models/person')
 require('dotenv').config()
 
 
+const url = process.env.MONGODB_URI
+
+if (!mongoURI) {
+  console.error('ERRO FATAL: A variável de ambiente MONGODB_URI não está definida.');
+  process.exit(1); 
+}
+
+console.log('connecting to', url)
+
+mongoose.connect(url)
+  .then(result => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connecting to MongoDB:', error.message)
+  })
+
 //middlewares
 app.use(express.static('build'))
 app.use(cors())
